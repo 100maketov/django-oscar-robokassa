@@ -57,6 +57,8 @@ def place_order(sender, **kwargs):
             session_data = CheckoutSessionData(request)
             if isinstance(user, AnonymousUser):
                 guest_email = session_data.get_guest_email()
+            else:
+                guest_email = user.email
 
     order_placement = RobokassaOrderPlacement()
     order_placement.request = request
