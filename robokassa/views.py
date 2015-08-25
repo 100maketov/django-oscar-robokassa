@@ -115,6 +115,13 @@ class FailResponseView(RedirectView, ProcessData):
         basket = get_object_or_404(Basket, id=self.basket_num,
                             status=Basket.FROZEN)
         basket.thaw()
+        
+        # if user is anonymous BasketMiddleware won't automaticly merge open baskets
+        if not hasattr(request, 'user') or not request.user.is_authenticated():
+            anonymous_basket = request.basket
+            if anonymous_basket.pk is None:
+                anonymous_basket.save()
+            anonymous_basket.merge(basket)
 
         # keep this for legacy
         fail_page_visited.send(sender = basket, 
