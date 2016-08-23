@@ -10,7 +10,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib import messages
 from oscar.core.loading import get_class
-from oscar.apps.payment.models import SourceType, Source
 from robokassa.conf import USE_POST, STRICT_CHECK
 from robokassa.models import SuccessNotification
 from robokassa.forms import ResultURLForm, SuccessRedirectForm, FailRedirectForm
@@ -20,6 +19,9 @@ ThankYouView = get_class('checkout.views', 'ThankYouView')
 Basket = get_model('basket', 'Basket')
 Order = get_model('order', 'Order')
 OrderNumberGenerator = get_class('order.utils', 'OrderNumberGenerator')
+Source = get_model('payment', 'Source')
+SourceType = get_model('payment', 'SourceType')
+
 
 class ProcessData(object):
     def get_data(self, request):
