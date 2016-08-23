@@ -7,16 +7,17 @@ from django.http import HttpRequest
 from django.contrib.sessions.backends.db import SessionStore
 from django.contrib.auth.models import AnonymousUser
 
-from oscar.apps.checkout.mixins import OrderPlacementMixin
-from oscar.apps.checkout.utils import CheckoutSessionData
-from oscar.apps.payment.models import SourceType, Source
-from oscar.core.loading import get_class
+from oscar.core.loading import get_class, get_model
 from oscar.core import prices
 
 from robokassa.signals import result_received, success_page_visited, fail_page_visited
 
 Selector = get_class('partner.strategy', 'Selector')
 post_payment = get_class('checkout.signals', 'post_payment')
+OrderPlacementMixin = get_class('checkout.mixins', 'OrderPlacementMixin')
+CheckoutSessionData = get_class('checkout.utils', 'CheckoutSessionData')
+Source = get_model('payment', 'Source')
+SourceType = get_model('payment', 'SourceType')
 
 selector = Selector()
 
