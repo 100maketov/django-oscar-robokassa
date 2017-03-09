@@ -24,7 +24,7 @@ def robokassa_redirect(request, basket_num, amount, **kwargs):
         if key in EXTRA_PARAMS or key in OPTIONAL_PARAMS:
             initial[key] = kwargs[key]
     if TEST_MODE:
-        initial['IsTest'] = '1'
+        initial['IsTest'] = 1
 
     session = request.session
     session.save()
