@@ -9,7 +9,7 @@ from oscar.core.loading import get_class
 
 
 from robokassa.forms import RobokassaForm
-from robokassa.conf import EXTRA_PARAMS
+from robokassa.conf import EXTRA_PARAMS, TEST_MODE
 OPTIONAL_PARAMS = ('Desc', 'IncCurrLabel', 'Email', 'Culture')
 RedirectRequired = get_class('payment.exceptions','RedirectRequired')
 
@@ -23,6 +23,8 @@ def robokassa_redirect(request, basket_num, amount, **kwargs):
     for key in kwargs:
         if key in EXTRA_PARAMS or key in OPTIONAL_PARAMS:
             initial[key] = kwargs[key]
+    if TEST_MODE:
+        initial['IsTest'] = 1
 
     session = request.session
     session.save()
