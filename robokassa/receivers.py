@@ -21,6 +21,7 @@ SourceType = get_model('payment', 'SourceType')
 
 selector = Selector()
 
+
 class RobokassaOrderPlacement(OrderPlacementMixin):
 
     def handle_successful_order(self, order):
@@ -39,7 +40,7 @@ def place_order(sender, **kwargs):
     request = kwargs.get('request', None) or HttpRequest()
     basket = sender
     user = basket.owner if basket.owner else AnonymousUser()
-    guest_email = None
+    guest_email = ''
 
     strategy = selector.strategy(user=user)
     session_data = shipping_address = shipping_method = None
