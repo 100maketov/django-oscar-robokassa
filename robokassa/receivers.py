@@ -3,6 +3,7 @@
 from logging import getLogger
 log = getLogger('robokassa.receivers')
 
+from django.conf import settings
 from django.http import HttpRequest
 from django.contrib.sessions.backends.db import SessionStore
 from django.contrib.auth.models import AnonymousUser
@@ -91,4 +92,4 @@ def place_order(sender, **kwargs):
     # all done lets place an order
     order_placement.handle_order_placement(
                 order_num, user, basket, shipping_address, shipping_method,
-                total, guest_email=guest_email)
+                total, guest_email=guest_email, status=getattr(settings, 'ROBOKASSA_INITIAL_ORDER_STATUS'))
