@@ -81,7 +81,7 @@ def place_order(sender, **kwargs):
 
     # now create payment source and events
     source_type, is_created = SourceType.objects.get_or_create(
-                name=u'Робокасса', code='robokassa')
+                code='robokassa', defaults={'name': u'Робокасса', })
     source = Source(source_type=source_type, amount_allocated=amount_allocated,
                 amount_debited=amount_allocated)
     order_placement.add_payment_source(source)

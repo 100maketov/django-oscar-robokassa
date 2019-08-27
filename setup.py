@@ -7,7 +7,7 @@ reload(sys).setdefaultencoding("UTF-8")
 
 setup(
     name='django-oscar-robokassa',
-    version='0.1.8',
+    version='0.1.9',
     author='Mikhail Korobov',
     author_email='kmike84@gmail.com',
 
