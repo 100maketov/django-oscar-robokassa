@@ -7,16 +7,10 @@ from django.db import models
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        "Write your forwards methods here."
-        # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
-        from django.core.management import call_command
-        from os.path import dirname, join
-        fixture_path = join(dirname(__file__), "payment.sourcetype.json")
-        print "Loading fixture from %s" % fixture_path
-        call_command("loaddata", fixture_path)
+        pass
 
     def backwards(self, orm):
-        "Write your backwards methods here."
+        pass
 
     models = {
         u'robokassa.successnotification': {
